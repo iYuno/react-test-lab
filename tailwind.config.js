@@ -4,6 +4,9 @@ export default {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      cardShadow: {
+        'lg': '0px 5px 24px rgba(0, 0, 0, 0.1)',
+      },
       fontSize: {
         'h1': ['52px', { lineHeight: '64px' }],
         'h2': ['40px', { lineHeight: '56px' }],
