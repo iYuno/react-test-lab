@@ -1,22 +1,51 @@
-import React from "react"
+import React, { useRef, useState, useImperativeHandle, useCallback } from "react"
 import { cn } from "../../lib"
+import styles from "./input.module.css"
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> { }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, ...props }, ref) => {
+  ({ className, type='text', placeholder = '', ...props }, ref) => {
+
+    const [inputValue, setInputValue] = useState("");
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    useImperativeHandle(ref, () => inputRef.current!);
+
+    const handleClick = useCallback(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }, []);
+
     return (
-      <input
-        type={type}
-        className={cn(
-          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
-          className
-        )}
-        ref={ref}
-        {...props}
-        prefix=""
-      />
+      <div className={cn(
+        styles["input-container"],
+        inputValue ? styles["input-container-active"] : ''
+      )} onClick={handleClick}>
+        {
+          placeholder ?
+            <span className={cn(
+              styles["input-label"],
+              inputValue ? styles["input-label-active"] : ''
+            )}>{placeholder}</span> : null
+        }
+        <input
+          type={type}
+          className={cn(
+            styles["input-field"],
+            inputValue ? styles["input-field-active"] : '',
+            placeholder ? styles["input-field-with-label"] : '',
+            className
+          )}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          ref={inputRef}
+          {...props}
+          prefix=""
+        />
+      </div>
     )
   }
 )

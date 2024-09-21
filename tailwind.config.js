@@ -28,6 +28,13 @@ export default {
           DEFAULT: 'hsl(var(--secondary))',
           foreground: 'hsl(var(--secondary-foreground))'
         },
+        inputBg: {
+          DEFAULT: 'hsl(var(--input-background))',
+          active: 'hsl(var(--input-background-active))',
+        },
+        inputText: {
+
+        },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))'
@@ -41,7 +48,16 @@ export default {
           foreground: 'hsl(var(--destructive-foreground))'
         },
         border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
+        input: 
+        {
+          DEFAULT: 'hsl(var(--input-background))',
+          active: 'hsl(var(--input-background-active))',
+          border: 'hsl(var(--input-border))',
+          label: {
+            DEFAULT: 'hsl(var(--input-label))',
+            active: 'hsl(var(--input-label-active))',
+          }
+        },
         ring: 'hsl(var(--ring))',
         chart: {
           '1': 'hsl(var(--chart-1))',

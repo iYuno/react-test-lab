@@ -4,7 +4,7 @@ import { ThemeProviderProps, Theme, ThemeProviderContext } from "@/shared/model"
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
+  defaultTheme = "light",
   storageKey = "vite-ui-theme",
   ...props
 }: ThemeProviderProps) {

@@ -1,0 +1,39 @@
+.input-container {
+  @apply cursor-text min-h-16 bg-input flex rounded-sm border-2 border-transparent relative transition duration-150 ease-in-out;
+}
+
+.input-container:focus-within {
+  @apply border-ring bg-background;
+}
+
+.input-container-active {
+  @apply bg-background border-muted;
+}
+
+.input-label {
+  @apply text-lg text-input-label px-4 absolute top-[calc(50%-18px)] h-8 content-center transition-all duration-150 ease-in-out;
+}
+
+.input-container:focus-within .input-label {
+  @apply text-sm text-input-label-active h-6 top-1;
+}
+
+.input-label-active {
+  @apply top-1 text-sm h-6 text-input-label-active;
+}
+
+.input-field {
+  @apply text-lg flex bg-input rounded-sm w-full h-full px-4 self-center transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.input-field-with-label {
+  @apply self-end h-auto pb-2
+}
+
+.input-field:focus {
+  @apply bg-background;
+}
+
+.input-field-active {
+  @apply bg-background;
+}
