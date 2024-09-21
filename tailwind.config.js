@@ -4,6 +4,14 @@ export default {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontSize: {
+        'h1': ['52px', { lineHeight: '64px' }],
+        'h2': ['40px', { lineHeight: '56px' }],
+        'h3': ['32px', { lineHeight: '40px' }],
+        'h4': ['24px', { lineHeight: '32px' }],
+        'h5': ['20px', { lineHeight: '24px' }],
+        'h6': ['16px', { lineHeight: '24px' }],
+      },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
@@ -48,7 +56,7 @@ export default {
           foreground: 'hsl(var(--destructive-foreground))'
         },
         border: 'hsl(var(--border))',
-        input: 
+        input:
         {
           DEFAULT: 'hsl(var(--input-background))',
           active: 'hsl(var(--input-background-active))',
