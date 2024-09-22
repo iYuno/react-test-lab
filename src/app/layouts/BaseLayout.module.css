@@ -1,0 +1,15 @@
+.root {
+  max-width: calc(100vw - 32px);
+}
+
+@media (min-width: 728px) {
+  .root {
+    max-width: 728px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .root {
+    max-width: 1280px;
+  }
+}

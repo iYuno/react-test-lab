@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { LandingPage } from "@/pages/landing";
-import { BaseLayout } from "@/widgets/layouts/baseLayout";
+import { BaseLayout } from "./layouts/baseLayout";
+
 
 export const router = createBrowserRouter([
   {

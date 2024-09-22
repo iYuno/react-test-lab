@@ -8,12 +8,12 @@ export default {
         'lg': '0px 5px 24px rgba(0, 0, 0, 0.1)',
       },
       fontSize: {
-        'h1': ['52px', { lineHeight: '64px' }],
-        'h2': ['40px', { lineHeight: '56px' }],
-        'h3': ['32px', { lineHeight: '40px' }],
-        'h4': ['24px', { lineHeight: '32px' }],
-        'h5': ['20px', { lineHeight: '24px' }],
-        'h6': ['16px', { lineHeight: '24px' }],
+        'h1': ['52px', { lineHeight: '64px', fontWeight: '600' }],
+        'h2': ['40px', { lineHeight: '56px', fontWeight: '600' }],
+        'h3': ['32px', { lineHeight: '40px', fontWeight: '600' }],
+        'h4': ['24px', { lineHeight: '32px', fontWeight: '600' }],
+        'h5': ['20px', { lineHeight: '24px', fontWeight: '600' }],
+        'h6': ['16px', { lineHeight: '24px', fontWeight: '600' }],
       },
       borderRadius: {
         lg: 'var(--radius)',
