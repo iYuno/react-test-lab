@@ -22,7 +22,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className={cn(
         styles["input-container"],
-        inputValue ? styles["input-container-active"] : ''
+        inputValue ? styles["input-container-active"] : '',
+        className
       )} onClick={handleClick}>
         {
           placeholder ?
@@ -37,7 +38,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             styles["input-field"],
             inputValue ? styles["input-field-active"] : '',
             placeholder ? styles["input-field-with-label"] : '',
-            className
+          
           )}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}

@@ -6,7 +6,7 @@ export function Logo() {
         <span className="size-6 bg-primary rounded-full z-30" />
         <span className="size-6 bg-background rounded-full" />
       </div>
-      <h5 className="text-background h-full">testLab</h5>
+      <h5 className="text-background font-medium">testLab</h5>
     </div>
   )
 }
