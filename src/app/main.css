@@ -477,7 +477,7 @@ template {
 @layer base {
 
   h1 {
-    @apply text-h1;
+    @apply md:text-h3 lg:text-h1;
   }
 
   h2 {
