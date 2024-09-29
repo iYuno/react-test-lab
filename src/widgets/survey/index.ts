@@ -1,1 +1,1 @@
-export { Survey } from './ui/Survey'
+export { Survey } from './ui/survey'

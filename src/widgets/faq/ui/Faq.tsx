@@ -8,7 +8,7 @@ export function Faq() {
       <h2 className="text-center">Вопросы и ответы</h2>
       <Accordion type="single" collapsible className="grid grid-cols-12 mt-10 gap-x-8">
         {
-          faq.map(({ id, question, answer }, index) => (
+          faq.map(({ id, question, answer }) => (
             <AccordionItem value={id.toString()} key={id} className="col-start-2 col-span-10 border-t border-input-border">
               <AccordionTrigger className="hover:text-primary font-semibold text-[18px]/[32px]">{question}</AccordionTrigger>
               <AccordionContent className="pr-8 text-[18px]/[32px] text-input-label">
