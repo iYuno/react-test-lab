@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const smoothScroll = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+export const smoothScroll = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
   event.preventDefault();
   const targetId = event.currentTarget.getAttribute('href')?.substring(1);
   if (targetId) {

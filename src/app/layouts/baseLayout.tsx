@@ -7,7 +7,7 @@ import styles from './BaseLayout.module.css'
 export function BaseLayout() {
   return (
     <div className={cn(
-      "flex flex-col min-h-screen mx-auto",
+      "flex flex-col min-h-screen mx-auto relative",
       styles.root
     )}>
       <Header />
