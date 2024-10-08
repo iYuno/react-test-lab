@@ -23,7 +23,7 @@ export function LandingPage() {
         <TestForm />
       </main>
       <div className="absolute left-0 right-0 h-screen z-10 bg-primary/80 -mx-[calc(100vw-100%)]" />
-      {rootElement && createPortal(<img className="absolute left-0 w-screen h-screen object-cover z-0 " src="public\bg_main.png" />, rootElement)}
+      {rootElement && createPortal(<img className="absolute left-0 w-screen h-screen object-cover z-0 " src="bg_main.png" />, rootElement)}
     </>
   )
 }

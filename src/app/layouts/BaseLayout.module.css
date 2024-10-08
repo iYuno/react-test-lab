@@ -1,10 +1,23 @@
 .root {
-  max-width: calc(100vw - 32px);
+  /* max-width: calc(100vw - 32px); */
+
 }
 
-@media (min-width: 728px) {
+@media (max-width: 767px) {
+  .root {
+    margin: 0 16px;
+  }
+}
+
+@media (min-width: 768px) {
   .root {
     max-width: 728px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .root {
+    max-width: 960px;
   }
 }
 

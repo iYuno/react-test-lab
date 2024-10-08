@@ -4,7 +4,7 @@ export function Survey() {
 
   return (
     <section className="flex flex-col relative py-16">
-      <ul className="grid grid-cols-2 gap-8 z-20">
+      <ul className="grid xs:grid-cols-1 lg:grid-cols-2 gap-8 z-20">
         {
           survey.map(({ title, description }, index) => (
             <li className="flex flex-col gap-4" key={index}>

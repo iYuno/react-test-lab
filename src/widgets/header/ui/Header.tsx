@@ -9,19 +9,18 @@ export function Header() {
 
   const toggleMenu = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     if (isMenuOpen) { smoothScroll(event) }
-    setMenuOpen(!isMenuOpen);
+    setMenuOpen(prevState => !prevState);
+
   };
 
   useEffect(() => {
     const handleScroll = () => {
-
       if (window.scrollY > 160) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
     };
-
     window.addEventListener('scroll', handleScroll);
 
     return () => {
@@ -30,15 +29,19 @@ export function Header() {
   }, []);
 
   return (
-    <header className="md:fixed lg:relative md:w-[728px] lg:w-full flex md:flex-col lg:flex-row lg:h-20 lg:justify-between z-30 items-center">
-      <div className="md:flex md:justify-between md:h-20 lg:h-auto md:w-full md:items-center z-30">
-        <Logo className={isScrolled || isMenuOpen ? "text-black" : "text-background"} />
+    <header className="xs:fixed lg:relative self-center xs:w-[calc(100%-32px)] md:w-[728px] lg:w-full flex xs:flex-col lg:flex-row h-20 lg:justify-between z-30 items-center">
+      <div className="xs:flex xs:justify-between h-full lg:h-auto xs:w-full xs:items-center z-30">
+        <Logo className={cn(
+          isScrolled || isMenuOpen ? "text-black" : "text-background",
+          "lg:text-background"
+        )} />
         <Burger
+          isOpen={isMenuOpen}
           toggleMenu={toggleMenu}
           className={cn(
             isMenuOpen ? "text-black" : "text-white",
             isScrolled && "text-black",
-            "lg:hidden"
+            "lg:hidden -right-4"
           )}
         />
         <span className={cn(
@@ -47,13 +50,13 @@ export function Header() {
           isScrolled && "bg-white"
         )} />
       </div>
-      <nav className="cursor-pointer md:*:border-t lg:*:border-none lg:h-7 md:absolute md:top-20 lg:top-0 lg:static md:w-full lg:w-auto text-nowrap font-light lg:content-center lg:*:px-3 flex sm:flex-col lg:flex-row text-[16px]/[28px] lg:*:text-background md:*:text-input-label-active *:decoration-transparent *:cursor-pointer *:underline-offset-4 transition-all *:duration-75 *:ease-out">
+      <nav className="cursor-pointer xs:*:border-b lg:*:border-none lg:h-7 xs:absolute xs:top-20 lg:top-0 lg:static xs:w-full lg:w-auto text-nowrap font-light lg:content-center lg:*:px-3 flex xs:flex-col lg:flex-row text-[16px]/[28px] lg:*:text-background xs:*:text-input-label-active *:decoration-transparent *:cursor-pointer *:underline-offset-4 transition-all *:duration-75 *:ease-out">
         <a
           href='#instructions'
           onClick={toggleMenu}
           className={cn(
-            "hover:decoration-background md:w-full lg:w-auto md:py-4 lg:py-0 z-30",
-            isMenuOpen ? '' : 'md:hidden lg:block'
+            "hover:decoration-background max-lg:hover:text-black max-lg:hover:border-b-black xs:border-t lg:border-none xs:w-full lg:w-auto xs:py-4 lg:py-0 z-30",
+            isMenuOpen ? '' : 'xs:hidden lg:block'
           )}
         >
           Как это работает
@@ -62,8 +65,8 @@ export function Header() {
           href='#reviews'
           onClick={toggleMenu}
           className={cn(
-            "hover:decoration-background md:w-full lg:w-auto md:py-4 lg:py-0 z-30",
-            isMenuOpen ? '' : 'md:hidden lg:block'
+            "lg:hover:decoration-black max-lg:hover:text-black max-lg:hover:border-b-black xs:w-full lg:w-auto xs:py-4 lg:py-0 z-30",
+            isMenuOpen ? '' : 'xs:hidden lg:block'
           )}
         >
           3-й блок
@@ -72,8 +75,8 @@ export function Header() {
           href='#faq'
           onClick={toggleMenu}
           className={cn(
-            "hover:decoration-background md:w-full lg:w-auto md:py-4 lg:py-0 z-30",
-            isMenuOpen ? '' : 'md:hidden lg:block'
+            "hover:decoration-background max-lg:hover:text-black max-lg:hover:border-b-black xs:w-full lg:w-auto xs:py-4 lg:py-0 z-30",
+            isMenuOpen ? '' : 'xs:hidden lg:block'
           )}
         >
           Вопросы и ответы
@@ -82,8 +85,8 @@ export function Header() {
           href='#testForm'
           onClick={toggleMenu}
           className={cn(
-            "hover:decoration-background md:w-full md:border-b lg:border-none lg:w-auto md:py-4 lg:py-0 z-30",
-            isMenuOpen ? '' : 'md:hidden lg:block'
+            "hover:decoration-background max-lg:hover:text-black max-lg:hover:border-b-black xs:w-full lg:w-auto xs:py-4 lg:py-0 z-30",
+            isMenuOpen ? '' : 'xs:hidden lg:block'
           )}
         >
           Форма

@@ -1,24 +1,23 @@
-import { useState } from "react";
+
 import { cn } from "../../lib";
 
 interface IBurger {
   toggleMenu: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-  className?: string
+  className?: string,
+  isOpen: boolean
 }
 
-export function Burger({ toggleMenu, className }: IBurger) {
-  const [isOpen, setIsOpen] = useState(false);
+export function Burger({ toggleMenu, className, isOpen }: IBurger) {
+
 
   const burgerHangle = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     toggleMenu(event);
-    setIsOpen(!isOpen);
   };
-
 
   return (
     <button
       className={cn(
-        "relative z-50 flex items-center justify-center p-5 text-gray-900 focus:outline-none",
+        "relative z-50 flex items-center justify-center size-16 text-gray-900 focus:outline-none",
         className
       )}
       onClick={burgerHangle}

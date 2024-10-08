@@ -1,4 +1,4 @@
-import { cn } from "@/shared/lib";
+import { cn } from "../../lib";
 
 interface ILogo {
   className?: string;
