@@ -3,14 +3,12 @@ import { cn, smoothScroll } from "@/shared/lib/utils";
 import { Burger, Logo } from "@/shared/ui";
 
 export function Header() {
-
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   const toggleMenu = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     if (isMenuOpen) { smoothScroll(event) }
     setMenuOpen(prevState => !prevState);
-
   };
 
   useEffect(() => {
@@ -33,7 +31,7 @@ export function Header() {
       <div className="xs:flex xs:justify-between h-full lg:h-auto xs:w-full xs:items-center z-30">
         <Logo className={cn(
           isScrolled || isMenuOpen ? "text-black" : "text-background",
-          "lg:text-background"
+          "lg:text-background transition-all duration-100"
         )} />
         <Burger
           isOpen={isMenuOpen}
@@ -50,12 +48,25 @@ export function Header() {
           isScrolled && "bg-white"
         )} />
       </div>
-      <nav className="cursor-pointer xs:*:border-b lg:*:border-none lg:h-7 xs:absolute xs:top-20 lg:top-0 lg:static xs:w-full lg:w-auto text-nowrap font-light lg:content-center lg:*:px-3 flex xs:flex-col lg:flex-row text-[16px]/[28px] lg:*:text-background xs:*:text-input-label-active *:decoration-transparent *:cursor-pointer *:underline-offset-4 transition-all *:duration-75 *:ease-out">
+      <nav
+        className={cn(
+          "xs:absolute xs:top-20 lg:top-0 lg:static",
+          "xs:w-full lg:w-auto lg:h-7",
+          "lg:content-center lg:px-3 xs:flex-col lg:flex-row flex",
+          "text-nowrap font-light text-[16px]/[28px]",
+          "lg:text-background xs:text-input-label-active",
+          "xs:*:border-b lg:*:border-none",
+          "decoration-transparent underline-offset-4",
+          "transition-all duration-75 ease-out",
+          "cursor-pointer"
+        )}
+      >
         <a
           href='#instructions'
           onClick={toggleMenu}
           className={cn(
-            "hover:decoration-background max-lg:hover:text-black max-lg:hover:border-b-black xs:border-t lg:border-none xs:w-full lg:w-auto xs:py-4 lg:py-0 z-30",
+            "hover:decoration-background max-lg:hover:text-black max-lg:hover:border-b-black",
+            "xs:border-t lg:border-none xs:w-full lg:w-auto xs:py-4 lg:py-0 z-30",
             isMenuOpen ? '' : 'xs:hidden lg:block'
           )}
         >
@@ -65,7 +76,8 @@ export function Header() {
           href='#reviews'
           onClick={toggleMenu}
           className={cn(
-            "lg:hover:decoration-black max-lg:hover:text-black max-lg:hover:border-b-black xs:w-full lg:w-auto xs:py-4 lg:py-0 z-30",
+            "lg:hover:decoration-black max-lg:hover:text-black max-lg:hover:border-b-black",
+            "xs:w-full lg:w-auto xs:py-4 lg:py-0 z-30",
             isMenuOpen ? '' : 'xs:hidden lg:block'
           )}
         >
@@ -75,7 +87,8 @@ export function Header() {
           href='#faq'
           onClick={toggleMenu}
           className={cn(
-            "hover:decoration-background max-lg:hover:text-black max-lg:hover:border-b-black xs:w-full lg:w-auto xs:py-4 lg:py-0 z-30",
+            "hover:decoration-background max-lg:hover:text-black max-lg:hover:border-b-black",
+            "xs:w-full lg:w-auto xs:py-4 lg:py-0 z-30",
             isMenuOpen ? '' : 'xs:hidden lg:block'
           )}
         >
@@ -85,7 +98,8 @@ export function Header() {
           href='#testForm'
           onClick={toggleMenu}
           className={cn(
-            "hover:decoration-background max-lg:hover:text-black max-lg:hover:border-b-black xs:w-full lg:w-auto xs:py-4 lg:py-0 z-30",
+            "hover:decoration-background max-lg:hover:text-black max-lg:hover:border-b-black",
+            "xs:w-full lg:w-auto xs:py-4 lg:py-0 z-30",
             isMenuOpen ? '' : 'xs:hidden lg:block'
           )}
         >
@@ -93,12 +107,13 @@ export function Header() {
         </a>
         <span
           className={cn(
-            "pointer-events-none z-20 border-none lg:hidden inset-0 absolute -mx-[calc(100vw-100%)] h-screen -top-20 transition-all ease-out duration-150",
+            "pointer-events-none z-20 border-none lg:hidden inset-0 absolute",
+            "-mx-[calc(100vw-100%)] h-screen -top-20",
+            "transition-all ease-out duration-150",
             isMenuOpen ? 'bg-white' : 'bg-transparent'
           )}
         />
       </nav>
-
     </header>
   )
 }

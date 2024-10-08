@@ -6,7 +6,7 @@ export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> { }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type='text', placeholder = '', ...props }, ref) => {
+  ({ className, type = 'text', placeholder = '', ...props }, ref) => {
 
     const [inputValue, setInputValue] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
@@ -14,17 +14,31 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     useImperativeHandle(ref, () => inputRef.current!);
 
     const handleClick = useCallback(() => {
+      if (inputRef.current && document.activeElement !== inputRef.current) {
+        setTimeout(() => {
+          inputRef.current?.focus();
+        }, 1);
+      }
+    }, []);
+
+    const handleFocus = useCallback(() => {
       if (inputRef.current) {
         inputRef.current.focus();
       }
     }, []);
 
+
     return (
-      <div className={cn(
-        styles["input-container"],
-        inputValue ? styles["input-container-active"] : '',
-        className
-      )} onClick={handleClick}>
+      <div
+        className={cn(
+          styles["input-container"],
+          inputValue ? styles["input-container-active"] : '',
+          className
+        )}
+        onClick={handleClick}
+        onFocus={handleFocus}
+        tabIndex={0}
+      >
         {
           placeholder ?
             <span className={cn(
@@ -38,8 +52,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             styles["input-field"],
             inputValue ? styles["input-field-active"] : '',
             placeholder ? styles["input-field-with-label"] : '',
-          
           )}
+          
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           ref={inputRef}
