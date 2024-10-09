@@ -1,70 +1,20 @@
-import { EmblaCarouselType } from 'embla-carousel';
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { reviews } from '@/shared/config/consts';
+import { reviews } from "@/shared/config/consts";
 import { cn } from "@/shared/lib";
-import { type CarouselApi, Card, CardContent, CardHeader, Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/shared/ui";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, Card, CardContent, CardHeader } from "@/shared/ui";
+import { useReviewsCarousel } from "../model/hooks";
 
 export function Reviews() {
-  const [api, setApi] = useState<CarouselApi>();
-  const [activeSlide, setActiveSlide] = useState<number>(0);
-  const [containerHeight, setContainerHeight] = useState<number>(0);
-
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const activeSlideRef = useRef<HTMLDivElement | null>(null);
-
-  const slidesToShow = useMemo(() => {
-    if (window.innerWidth < 768) return 0;
-    if (window.innerWidth < 1280) return 1;
-    return 2;
-  }, []);
-
-  const updateSlidesInView = useCallback((api: EmblaCarouselType) => {
-    const slidesInView = api.slidesInView();
-    if (slidesInView.length === api.slideNodes().length) {
-      api.off('slidesInView', updateSlidesInView);
-    }
-    setActiveSlide(slidesInView[0]);
-  }, []);
-
-  const updateContainerHeight = useCallback(() => {
-    if (activeSlideRef.current) {
-      const newHeight = activeSlideRef.current.offsetHeight;
-      if (newHeight !== containerHeight) {
-        setContainerHeight(newHeight);
-      }
-    }
-  }, [containerHeight]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      updateContainerHeight();
-    };
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [updateContainerHeight]);
-
-  useEffect(() => {
-    if (!api) return;
-    api.on('slidesInView', updateSlidesInView);
-    api.on('reInit', updateSlidesInView);
-
-    return () => {
-      api.off('slidesInView', updateSlidesInView);
-      api.off('reInit', updateSlidesInView);
-    };
-  }, [api, updateSlidesInView]);
-
-  useEffect(() => {
-    updateContainerHeight();
-  }, [activeSlide, updateContainerHeight]);
-
-  const shouldShowPagination = reviews.length > slidesToShow;
-  const paginationDots = useMemo(() => {
-    return Array.from({ length: reviews.length - slidesToShow });
-  }, [reviews.length, slidesToShow]);
+  const {
+    api,
+    setApi,
+    activeSlide,
+    activeSlideRef,
+    containerHeight,
+    slidesToShow,
+    shouldShowPagination,
+    paginationDots,
+    carouselRef
+  } = useReviewsCarousel();
 
   return (
     <section id='reviews' className="flex flex-col relative pt-8">
