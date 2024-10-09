@@ -42,7 +42,6 @@ export function useFormValidation() {
   };
 
   const handleAgreementChange = (checked: boolean) => {
-    console.log(checked)
     setIsAgreed(checked);
     setErrors((prev) => ({ ...prev, isAgreed: validateAgreement(checked) }));
   };
@@ -61,7 +60,6 @@ export function useFormValidation() {
 export const submitForm = (formData: { userName: string, userPhone: string, isAgreed: boolean }): Promise<{ status: number, formData: { userName: string, userPhone: string, isAgreed: boolean } }> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      console.log("Form submitted successfully:", formData);
       resolve({ status: 200, formData });
     }, 1000);
   });
