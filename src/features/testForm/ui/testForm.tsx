@@ -13,8 +13,9 @@ export function TestForm() {
     event.preventDefault();
     if (!errors.userName && !errors.userPhone && isAgreed) {
       setIsSubmitting(true);
-      await submitForm({ userName, userPhone, isAgreed })
+      await submitForm({ userName, userPhone })
         .then((response) => {
+          console.log(response)
           toast({
             title: `Спасибо, ${response.formData.userName}, форма успешно отправлена.`,
             description: `Дата и время отправки: ${new Date().toLocaleString("ru")}`,

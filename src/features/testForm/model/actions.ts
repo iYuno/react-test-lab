@@ -60,11 +60,10 @@ export function useFormValidation() {
 interface IForm {
   userName: string,
   userPhone: string,
-  isAgreed: boolean,
 }
 
 export const submitForm = async (formData: IForm): Promise<{ status: number; formData: IForm }> => {
-  const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+  const response = await fetch('https://my-json-server.typicode.com/iYuno/db/formPosts', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -73,6 +72,7 @@ export const submitForm = async (formData: IForm): Promise<{ status: number; for
   });
 
   const data = await response.json();
+  
   return {
     status: response.status,
     formData: data,
