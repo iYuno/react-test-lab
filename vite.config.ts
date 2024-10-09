@@ -9,5 +9,5 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: "/react-test-lab"
+  base: "/react-test-lab/"
 })
