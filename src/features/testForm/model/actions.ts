@@ -57,10 +57,24 @@ export function useFormValidation() {
   };
 }
 
-export const submitForm = (formData: { userName: string, userPhone: string, isAgreed: boolean }): Promise<{ status: number, formData: { userName: string, userPhone: string, isAgreed: boolean } }> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ status: 200, formData });
-    }, 1000);
+interface IForm {
+  userName: string,
+  userPhone: string,
+  isAgreed: boolean,
+}
+
+export const submitForm = async (formData: IForm): Promise<{ status: number; formData: IForm }> => {
+  const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
   });
+
+  const data = await response.json();
+  return {
+    status: response.status,
+    formData: data,
+  };
 };
