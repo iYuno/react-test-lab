@@ -1,23 +1,22 @@
-import React, { useRef, useState, useImperativeHandle, useCallback } from "react"
+import React, { useRef, useImperativeHandle, useCallback, ReactElement } from "react"
 import { cn } from "../../lib"
 import styles from "./input.module.css"
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> { }
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  suffix?: ReactElement,
+  errorMessage?: string
+}
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type = 'text', placeholder = '', ...props }, ref) => {
+  ({ className, type = 'text', placeholder = '', value, onChange, suffix, errorMessage, ...props }, ref) => {
 
-    const [inputValue, setInputValue] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
-
     useImperativeHandle(ref, () => inputRef.current!);
 
     const handleClick = useCallback(() => {
       if (inputRef.current && document.activeElement !== inputRef.current) {
-        setTimeout(() => {
-          inputRef.current?.focus();
-        }, 1);
+        inputRef.current.focus();
       }
     }, []);
 
@@ -27,12 +26,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       }
     }, []);
 
-
     return (
       <div
         className={cn(
           styles["input-container"],
-          inputValue ? styles["input-container-active"] : '',
+          inputRef.current?.value ? styles["input-container-active"] : '',
           className
         )}
         onClick={handleClick}
@@ -43,23 +41,23 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           placeholder ?
             <span className={cn(
               styles["input-label"],
-              inputValue ? styles["input-label-active"] : ''
+              inputRef.current?.value ? styles["input-label-active"] : ''
             )}>{placeholder}</span> : null
         }
         <input
           type={type}
           className={cn(
             styles["input-field"],
-            inputValue ? styles["input-field-active"] : '',
+            inputRef.current?.value ? styles["input-field-active"] : '',
             placeholder ? styles["input-field-with-label"] : '',
           )}
-          
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          value={value}
+          onChange={onChange}
           ref={inputRef}
           {...props}
-          prefix=""
         />
+        {errorMessage && <span className="absolute -bottom-6 text-destructive">{errorMessage}</span>}
+        {suffix || null}
       </div>
     )
   }
