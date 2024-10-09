@@ -28,13 +28,16 @@ To get a local copy of the project up and running, follow these steps:
 
 	```git clone https://github.com/yourusername/react-test-lab.git```
 
-2. Navigate to the project directory:
+2. Navigate to the project directory:\
+
 	``` cd react-test-lab```
 
 3. Install the dependencies:
+
 	```npm install```
 
 4. Start the development server:
+
 ```npm run dev```
 
 ## Scripts
