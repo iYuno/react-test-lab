@@ -1,9 +1,10 @@
+import React from "react";
 import { reviews } from "@/shared/config/consts";
 import { cn } from "@/shared/lib";
-import { CarouselContent, CarouselItem, Card, CardHeader, CardContent, CarouselPrevious, CarouselNext, Carousel } from "@/shared/ui";
+import { CarouselContent, CarouselItem, Card, CardHeader, CardContent, CarouselPrevious, CarouselNext, Carousel, CarouselApi } from "@/shared/ui";
 import { useReviewsCarousel } from "../model/hooks";
 
-export function CarouselEntity() {
+export function ReviewsCarousel() {
 
   const {
     api,
@@ -59,6 +60,10 @@ export function CarouselEntity() {
                   <CardContent className="flex items-center justify-center px-0 py-5">
                     <p className="text-[14px]/[24px] font-normal text-foreground">{review}</p>
                   </CardContent>
+                  {/* 
+                    WIP
+                    <CardInner avatar={avatar} name={name} city={city} review={review} /> 
+                  */}
                 </Card>
               </CarouselItem>
             ))}
@@ -82,3 +87,35 @@ export function CarouselEntity() {
     </>
   )
 }
+
+
+/*
+One of the solutions for optimizing the rendering of parts of the Card component.
+ToDo: come up with the best rendering optimization solution.
+
+interface ICardInner {
+  avatar: string | null;
+  name: string;
+  city: string;
+  review: string;
+}
+
+const CardInner = React.memo(({ avatar, name, city, review }: ICardInner) => {
+  return (
+    <>
+      <CardHeader className="flex flex-row p-0 gap-4">
+        <img
+          className="flex size-11 bg-primary rounded-full"
+          src={avatar || 'default-avatar.png'}
+        />
+        <div className='w-[calc(100%-3.75rem)]'>
+          <h6 className='font-semibold'>{name}</h6>
+          <p className='font-normal text-[12px]/[16px]'>{city}</p>
+        </div>
+      </CardHeader>
+      <CardContent className="flex items-center justify-center px-0 py-5">
+        <p className="text-[14px]/[24px] font-normal text-foreground">{review}</p>
+      </CardContent>
+    </>
+  )
+}) */

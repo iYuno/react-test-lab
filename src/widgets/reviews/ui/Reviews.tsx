@@ -1,4 +1,4 @@
-import { CarouselEntity as Carousel } from "@/entities/Carousel";
+import { ReviewsCarousel as Carousel } from "@/entities/ReviewsCarousel";
 
 
 export function Reviews() {

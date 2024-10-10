@@ -1,23 +1,24 @@
-import { EmblaCarouselType } from 'embla-carousel';
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { reviews } from "@/shared/config/consts";
+import { CarouselApi } from '@/shared/ui';
 
 export function useReviewsCarousel() {
-  const [api, setApi] = useState<EmblaCarouselType>();
+  const [api, setApi] = useState<CarouselApi>();
   const [activeSlide, setActiveSlide] = useState(0);
   const [containerHeight, setContainerHeight] = useState(0);
 
   const carouselRef = useRef<HTMLDivElement>(null);
   const activeSlideRef = useRef<HTMLDivElement | null>(null);
 
-  // maybe should add throttling
   const slidesToShow = useMemo(() => {
     if (window.innerWidth < 768) return 0;
     if (window.innerWidth < 1280) return 1;
     return 2;
   }, [window.innerWidth]);
 
-  const updateSlidesInView = useCallback((api: EmblaCarouselType) => {
+  // ToDo: optimize this effect
+  const updateSlidesInView = useCallback((api: CarouselApi) => {
+    if (!api) return;
     const slidesInView = api.slidesInView();
     if (slidesInView.length === api.slideNodes().length) {
       api.off('slidesInView', updateSlidesInView);
@@ -32,33 +33,20 @@ export function useReviewsCarousel() {
         setContainerHeight(newHeight);
       }
     }
-  }, [containerHeight]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      updateContainerHeight();
-    };
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [updateContainerHeight]);
+  }, []);
 
   useEffect(() => {
     if (!api) return;
     api.on('slidesInView', updateSlidesInView);
-    api.on('reInit', updateSlidesInView);
-
+    
     return () => {
       api.off('slidesInView', updateSlidesInView);
-      api.off('reInit', updateSlidesInView);
     };
   }, [api, updateSlidesInView]);
 
   useEffect(() => {
     updateContainerHeight();
-  }, [activeSlide, updateContainerHeight]);
+  }, [activeSlide, updateContainerHeight, api]);
 
   const shouldShowPagination = reviews.length > slidesToShow;
   const paginationDots = useMemo(() => {
