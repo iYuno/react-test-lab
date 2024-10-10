@@ -10,11 +10,12 @@ export function useReviewsCarousel() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const activeSlideRef = useRef<HTMLDivElement | null>(null);
 
+  // maybe should add throttling
   const slidesToShow = useMemo(() => {
     if (window.innerWidth < 768) return 0;
     if (window.innerWidth < 1280) return 1;
     return 2;
-  }, []);
+  }, [window.innerWidth]);
 
   const updateSlidesInView = useCallback((api: EmblaCarouselType) => {
     const slidesInView = api.slidesInView();

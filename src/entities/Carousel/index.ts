@@ -1,0 +1,1 @@
+export { CarouselEntity } from './ui/Carousel'
